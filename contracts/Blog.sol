@@ -46,5 +46,46 @@ contract Blog is Ownable{
         return hashToPost[hash];
     }
 
-    
+    function createPost(string memory title,string memory hash) public onlyOwner {
+        _postIds.increment();
+        uint postId = _postIds.current();
+        Post storage post = idToPost[postId];
+        post.id = postId;
+        post.title = title;
+        post.published = true;
+        post.content = hash;
+        hashToPost[hash] = post;
+
+        emit PostCreated(postId,title,hash);
+    }
+
+    function updatePost (uint postId,string memory title,string memory hash,bool published) public onlyOwner {
+        Post storage post = idToPost[postId];
+        post.title = title;
+        post.published = published;
+        post.content = hash;
+
+        idToPost[postId]=post;
+        hashToPost[hash]=post;
+
+        emit PostUpdated(post.id,title,hash,published);
+    }
+
+    function fetchPost() public view returns(Post[] memory ){
+
+        uint itemCount = _postIds.current();
+
+        Post[] memory posts = new Post[] (itemCount);
+
+        for(uint i = 0;i<itemCount;){
+            uint currentPostCounter = i+1;
+            Post storage currentPostObj = idToPost[currentPostCounter];
+            posts[i]= currentPostObj;
+            unchecked {
+                i++;
+            }
+        }
+
+        return posts;
+    }
 }
