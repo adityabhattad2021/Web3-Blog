@@ -41,7 +41,11 @@ export default function CreatePost() {
 
 	async function savePostToIPFS() {
 		try {
-			const cid = await storage.put(post)
+			console.log(post);
+			const blob = new Blob([JSON.stringify(post)], { type: 'application/json' })
+			const fileToUpload=new File([blob],'post.json')
+			const cid = await storage.put([fileToUpload])
+			console.log(cid);
 			return cid;
 		} catch (error) {
 			console.log(error);

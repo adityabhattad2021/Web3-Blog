@@ -19,6 +19,8 @@ export default function PostPage(props) {
 		router.push("/create-post");
 	}
 
+	console.log(posts);
+
 	return (
 		<div>
 			<div className={postList}>
@@ -56,9 +58,12 @@ export default function PostPage(props) {
 
 export async function getServerSideProps() {
 	const provider = new ethers.providers.JsonRpcProvider();
+	console.log(provider);
+	const signer = provider.getSigner();
 	const contract = new ethers.Contract(contractAddress, Blog.abi, provider);
+	// console.log(contract);
 	const posts = await contract.fetchPosts();
-	console.log(posts);
+	// console.log(posts);
 	return {
 		props: {
 			posts: JSON.parse(JSON.stringify(posts)),
