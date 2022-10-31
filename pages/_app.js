@@ -12,7 +12,7 @@ const config = {
   ethereum: {
     appName: 'web3Modal',
     chains: [
-      chains.localhost,chains.goerli
+      chains.localhost,chains.polygonMumbai
     ],
     providers: [
       providers.walletConnectProvider({projectId:process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID})

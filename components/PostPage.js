@@ -18,14 +18,14 @@ export default function PostPage(props) {
 	async function navigate() {
 		router.push("/create-post");
 	}
-
-	console.log(posts);
+	// console.log(`Props are ${JSON.stringify(props)}`);
+	// console.log(posts);
 
 	return (
 		<div>
 			<div className={postList}>
 				{posts &&
-					posts.map((post) => (
+					posts.map((post,index) => (
 						<Link href={`/post/${post[2]}`} key={index}>
 							<div className={linkStyle}>
 								<p className={postTitle}>{post[1]}</p>
@@ -41,7 +41,7 @@ export default function PostPage(props) {
 					))}
 			</div>
 			<div className={container}>
-				{account.address === ownerAddress && (
+				{account.address === ownerAddress && posts && !posts.length && (
 					<button className={buttonStyle} onClick={navigate}>
 						Create The First Post
 						<img
@@ -56,20 +56,7 @@ export default function PostPage(props) {
 	);
 }
 
-export async function getServerSideProps() {
-	const provider = new ethers.providers.JsonRpcProvider();
-	console.log(provider);
-	const signer = provider.getSigner();
-	const contract = new ethers.Contract(contractAddress, Blog.abi, provider);
-	// console.log(contract);
-	const posts = await contract.fetchPosts();
-	// console.log(posts);
-	return {
-		props: {
-			posts: JSON.parse(JSON.stringify(posts)),
-		},
-	};
-}
+
 
 const arrowContainer = css`
 	display: flex;
@@ -94,9 +81,9 @@ const linkStyle = css`
 `;
 
 const postList = css`
-	width: 700px;
+	width: 95%;
 	margin: 0 auto;
-	padding-top: 50px;
+	padding-top: 30px;
 `;
 
 const container = css`

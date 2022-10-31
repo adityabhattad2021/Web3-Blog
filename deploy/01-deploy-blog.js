@@ -1,5 +1,8 @@
 const { network, ethers } = require("hardhat");
 const fs = require("fs");
+const { verify } = require("../utils/verify");
+
+const developmentChains = ["hardhat", "localhost"];
 
 module.exports = async function ({ getNamedAccounts, deployments }) {
 	const { deploy, log } = deployments;
@@ -16,7 +19,15 @@ module.exports = async function ({ getNamedAccounts, deployments }) {
 		waitConfirmations: network.config.blockConfirmations || 1,
 	});
     log("-----------------------Deployed Successfully----------------");
-    log(blog.address)
+	log(blog.address)
+	
+	// if (!developmentChains.includes(network.name) && process.env.POLYSCAN_API_KEY) {
+
+
+		log("--------------------------------------------------------");
+		await verify(blog.address, args);
+		log("--------------------------------------------------------");
+	// }
 
 	log("---------------------Writing ABI------------------------");
 	fs.writeFileSync(
