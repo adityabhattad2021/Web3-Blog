@@ -26,7 +26,7 @@ export default function PostPage(props) {
 			<div className={postList}>
 				{posts &&
 					posts.map((post,index) => (
-						<Link href={`/post/${post[2]}`} key={index}>
+						<Link href={`/posts/${post[2]}`} key={index}>
 							<div className={linkStyle}>
 								<p className={postTitle}>{post[1]}</p>
 								<div className={arrowContainer}>

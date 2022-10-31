@@ -30,7 +30,7 @@ export default function Home({posts}) {
 					<Link href="/">
 						<div className={titleContainer}>
 							<h2 className={title}>Decentralized Blog</h2>
-							<p className={description}>WEB3</p>
+							<p className={description}>Powered by WEB3</p>
 						</div>
 					</Link>
 					{!account.isConnected && (
@@ -70,7 +70,7 @@ let provider
 if (process.env.NEXT_PUBLIC_ENVIRONMENT === 'local') {
   provider = new ethers.providers.JsonRpcProvider()
 } else if (process.env.NEXT_PUBLIC_ENVIRONMENT === 'testnet') {
-	provider = new ethers.providers.JsonRpcProvider('https://polygon-mumbai.g.alchemy.com/v2/3NvmRXgHgtFF3g_ZopWMQ1OPRXpeGxTW')
+	provider = new ethers.providers.JsonRpcProvider(process.env.NEXT_PUBLIC_POLYGON_RPC_URL)
 	// console.log("woaskdjads");
 }
 

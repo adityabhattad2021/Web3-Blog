@@ -81,13 +81,15 @@ export default function CreatePost() {
 
 	async function handleFileChange(e) {
 		const uploadedFile = e.target.files[0];
-		console.log(uploadedFile);
-		if (!uploadedFile) {
+		const blob = uploadedFile.slice(0, uploadedFile.size, 'image/png');
+		const forIPFS = new File([blob],'cover-img.png',{type:'image/png'})
+		console.log(forIPFS);
+		if (!forIPFS) {
 			console.log("No uploaded file found");
 			return;
 		}
 
-		const cid = await storage.put([uploadedFile])	
+		const cid = await storage.put([forIPFS])	
 
 		console.log(cid);
 
