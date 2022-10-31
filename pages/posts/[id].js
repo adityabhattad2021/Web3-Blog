@@ -5,7 +5,7 @@ import { css } from "@emotion/css";
 import Link from "next/link";
 import { contractAddress, ownerAddress } from "../../config";
 import Blog from "../../artifacts/contracts/Blog.sol/Blog.json";
-import { useAccount, Web3Button } from "@web3modal/react";
+import { useAccount } from "@web3modal/react";
 
 const ipfsURI = "https://w3s.link/ipfs/";
 const ipfsEnd = "/post.json";
