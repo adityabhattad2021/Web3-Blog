@@ -39,7 +39,7 @@ export default function Home({posts}) {
 						</div>
 					)}
 					{account.isConnected && (
-						<p className={accountInfo}>{account.address}</p>
+						<h1 className={accountInfo}>{account.address}</h1>
 					)}
 				</div>
 				<div className={linkContainer}>

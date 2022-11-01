@@ -20,7 +20,7 @@ const ipfsImgEnd = "/cover-image/png";
 
 export default function EditPost() {
 	const [post, setPost] = useState(null);
-	const [editing, setEditing] = useState(null);
+	const [editing, setEditing] = useState(true);
 
 	const router = useRouter();
 	const { id } = router.query;
@@ -52,11 +52,6 @@ export default function EditPost() {
 		const ipfsURL = `${ipfsURI}${id}${ipfsEnd}`;
 		const response = await fetch(ipfsURL);
 		const data = await response.json();
-
-		if (data.coverImage) {
-			let coverImage = `${ipfsURI}${data.coverImage}${ipfsImgEnd}`;
-			data.coverImage = coverImage;
-		}
 
 		data.id = postId;
 		setPost(data);
@@ -118,7 +113,7 @@ export default function EditPost() {
 					{post.coverImage && (
 						<img
 							src={post.coverImage}
-							className={coverImagestyle}
+							className={coverImageStyle}
 						/>
 					)}
 					<h1>{post.title}</h1>
@@ -127,7 +122,8 @@ export default function EditPost() {
 					</div>
 				</div>
 			)}
-			<button
+            <button
+                className={button}
 				onClick={() => {
 					setEditing(!editing);
 				}}
@@ -137,3 +133,53 @@ export default function EditPost() {
 		</div>
 	);
 }
+
+
+const button = css`
+	background-color: #fafafa;
+	outline: none;
+	border: none;
+	border-radius: 15px;
+	cursor: pointer;
+	margin-right: 10px;
+	font-size: 18px;
+	padding: 16px 70px;
+	box-shadow: 7px 7px rgba(0, 0, 0, 0.1);
+`;
+
+const titleStyle = css`
+    margin-top: 40px;
+    border:none;
+    outline:none;
+    background-color:inherit;
+    font-size:44px;
+    font-weight:600;
+    &::placeholder{
+        color:#999999;
+    }
+`
+
+const mdEditor = css`
+    margin-top:40px;
+`
+
+const coverImageStyle = css`
+    width:900px;
+`
+
+const container = css`
+    width:900px;
+    margin:0 auto;
+`
+
+const contentContainer = css`
+    margin-top:60px;
+    padding:0 40px;
+    border-left:1px solid #e7e7e7;
+    border-right:1px solid #e7e7e7;
+    & img{
+        max-width:900px;
+    }
+`
+
+
