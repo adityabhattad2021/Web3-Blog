@@ -26,3 +26,11 @@ Preview:
 
 Polygon Mumbai Testnet Address: 0x31b853A2A587cDf6391b66F490E450EaFb56B758
 
+
+Whats Next:
+- Improve Styling
+- Add a Sub Graph
+- Query from The Graph Protocal
+- Add Edit Image Functionality
+- Create Post For All Functionality
+- Deployment
