@@ -64,6 +64,7 @@ export default function CreatePost() {
 
 			try {
 				const val = await contract.createPost(post.title, hash);
+				await provider.waitForTransaction(val.hash);
 				console.log("Val: ", val);
 			} catch (error) {
 				console.log("Error: ", error);
